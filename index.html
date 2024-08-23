@@ -4,11 +4,11 @@
 <script>
   var pubs =
 {
-    "name": "NIKE",
+    "name": "Juampi !!",
     "color": "orange", "source":"legacy",
     "children": [
       {
-            "name": "Non Consumer Facing",
+            "name": "Nodo con links ejemplo",
             "color": "green" ,
             "children":[
                 {"source":"legacy","name": "App-CE_ESB", "color" : "red" },
@@ -19,7 +19,7 @@
                 {"source":"legacy","name": "App-CE_JMS", "color" : "green" },
                 {"source":"legacy","name": "App-CE_JMS_Bridge", "color" : "green" },
                 {"source":"legacy","name": "App-CE_Sterling_Inv", "color" : "green" },
-                {"source":"legacy","name": "App-CE_Sterling_Ops", "color" : "green" },
+                {"source":"legacy","name": "Este tiene links", "color" : "blue", link: 'www.google.com' },
                 {"source":"legacy","name": "App-CE_Sterling_NikeID", "color" : "green" },
                 {"source":"legacy","name": "App-CE_Sterling_MPOS", "color" : "green" },
                 {"source":"legacy","name": "App-CE_Sterling_OMS", "color" : "green" },
@@ -133,6 +133,8 @@
     ]
 }
 
+  var NODE_SIZE = 8; // AJUSTAR TAMAÑO DE NODOS
+  
   function init() {
 var diameter = 1000;
 
@@ -188,11 +190,18 @@ function update(source) {
       .on("click", click);
 
   nodeEnter.append("circle")
-      .attr("r", 1e-6)
-      .style("fill", function(d) { return d._children ? d.color : d.color; });
+     // .attr("r", 1e-6)
+      .attr("r", function(d) { 
+    return NODE_SIZE * Math.pow(0.95, d.depth); 
+  }).style("fill", function(d) { return d._children ? d.color : d.color; });
 
+ 
+  
   nodeEnter.append("text")
-      .attr("x", 10)
+    .attr("x", function(d) { 
+        return (NODE_SIZE * Math.pow(0.95, d.depth)) + 5; // Adjust the offset as needed
+    })
+     // .attr("x", 10)
       .attr("dy", ".35em")
      .attr("text-anchor", "start")
      .attr("transform", function(d) { return d.x < 180 ? "translate(0)" : "rotate(90)translate(-" + (d.name.length * 5.5)  + ")"; })
@@ -264,6 +273,10 @@ function update(source) {
 
 // Toggle children on click.
 function click(d) {
+  if(d.link) {
+    window.open(d.link,'_blank');
+    console.log("clickeado nodo con links");
+  }
   if (d.children) {
     d._children = d.children;
     d.children = null;
