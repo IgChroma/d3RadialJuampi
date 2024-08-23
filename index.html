@@ -133,6 +133,7 @@
     ]
 }
 
+  function init() {
 var diameter = 1000;
 
 var margin = {top: 20, right: 20, bottom: 20, left: 20},
@@ -164,6 +165,10 @@ root.y0 = 0;
 update(root);
 
 d3.select(self.frameElement).style("height", "800px");
+
+  }
+
+  setTimeout(init, 50);
 
 function update(source) {
 
@@ -280,6 +285,8 @@ function collapse(d) {
       d.children = null;
     }
 }
+
+  
 </script>
 <style>
 .node {
@@ -301,6 +308,7 @@ function collapse(d) {
   stroke: #ccc;
   stroke-width: 1.5px;
 }
+  
 </style>
 </head>
 <body></body>
