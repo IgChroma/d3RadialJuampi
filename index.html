@@ -133,7 +133,13 @@
     ]
 }
 
-  var NODE_SIZE = 8; // AJUSTAR TAMAÑO DE NODOS
+
+// ###############################################################################
+// ###############################################################################
+  // ABAJO DE ACA NO TOCAR
+  // ###############################################################################
+  // ###############################################################################
+  var NODE_SIZE = 15; // AJUSTAR TAMAÑO DE NODOS
   
   function init() {
 var diameter = 1000;
@@ -274,7 +280,8 @@ function update(source) {
 // Toggle children on click.
 function click(d) {
   if(d.link) {
-    window.open(d.link,'_blank');
+    const targetUrl = new URL(d.link); // Construct complete URL
+    window.open(targetUrl, '_blank');
     console.log("clickeado nodo con links");
   }
   if (d.children) {
