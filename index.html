@@ -135,8 +135,7 @@
 }
 
   const urlPublicada = 'https://docs.google.com/spreadsheets/d/1XgQkNm0y7gl1l2lqqd5FUpHbmmFws57XN-cVTe_lqYs/pub?gid=1345404208&single=true&output=csv'
-
-d3.csv(urlPublicada).then(data => {console.log("data de gugel", data)}).catch(error => {console.error("Error loading data:", error);});
+// d3.csv(urlPublicada).then(data => {console.log("data de gugel", data)}).catch(error => {console.error("Error loading data:", error);});
 
 var colapsarTodo;
 // ###############################################################################
@@ -233,7 +232,7 @@ function update(source) {
 
 
   nodeUpdate.select("circle")
-      .attr("r", 4.5)
+      .attr("r", 7)
       .style("fill", function(d) { return d._children ? d.color : d.color; });
 
   nodeUpdate.select("text")
