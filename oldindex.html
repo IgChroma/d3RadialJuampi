@@ -1,0 +1,345 @@
+<html>
+  <head>
+   <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/d3/3.3.10/d3.min.js"></script>
+      <!-- <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/d3/7.8.3/d3.min.js"></script> -->
+<script>
+  var pubs =
+{
+    "name": "Juampi !!",
+    "color": "orange", "source":"legacy",
+    "children": [
+      {
+            "name": "Nodo con links ejemplo",
+            "color": "green" ,
+            "children":[
+                {"source":"legacy","name": "App-CE_ESB", "color" : "red" },
+                {"source":"legacy","name": "App-CE_Async_Bridge", "color" : "green" },
+                {"source":"legacy","name": "App-CE_Batch", "color" : "red" },
+                {"source":"legacy","name": "App-CE_Hub", "color" : "green" },
+                {"source":"legacy","name": "App-CE_Interactive", "color" : "green" },
+                {"source":"legacy","name": "App-CE_JMS", "color" : "green" },
+                {"source":"legacy","name": "App-CE_JMS_Bridge", "color" : "green" },
+                {"source":"legacy","name": "App-CE_Sterling_Inv", "color" : "green" },
+                {"source":"legacy","name": "Este tiene links", "color" : "blue", url: 'https://www.google.com' },
+                {"source":"legacy","name": "App-CE_Sterling_NikeID", "color" : "green" },
+                {"source":"legacy","name": "App-CE_Sterling_MPOS", "color" : "green" },
+                {"source":"legacy","name": "App-CE_Sterling_OMS", "color" : "green" },
+                {"source":"legacy","name": "App-CE_Sterling_Q", "color" : "green" },
+                {"source":"legacy","name": "App-CE_Sync_Proxy", "color" : "green" }
+            ]
+        },
+        {
+            "name": "Consumer Facing Legacy",
+            "color": "green" 
+            , "source":"cloud",
+            "children":[
+                {"name": "App-Sabrix", "color" : "green" , "source":"legacy"},
+                {"name": "App-IDBuilder", "color" : "red" , "source":"legacy"},
+                {"name": "App-US", "color" : "green" , "source":"legacy"},
+                {"name": "App-CQ", "color" : "green" , "source":"legacy"},
+                {"name": "App-AP", "color" : "green" , "source":"legacy"},
+                {"name": "App-EU", "color" : "green" , "source":"legacy"},
+                {"name": "App-ID10", "color" : "green" , "source":"legacy"},
+                {"name": "App-Payment", "color" : "green" , "source":"legacy"},
+                {"name": "App-Sterling", "color" : "green" , "source":"legacy"},
+                {"name": "App-EmerchPpub", "color" : "green" , "source":"legacy"},
+                {"name": "App-Tesla", "color" : "green" , "source":"legacy"}
+            ]
+        },
+        {
+            "name": "Cloud Services",
+            "color": "orange",
+            "children": [
+                {"name": "Product Feeds", "color" : "green", "id":"productfeed", "source":"cloud"},
+                {"name": "Rollup Threads", "color" : "orange", "id":"productfeedrollupsv2", "source":"cloud"},
+                {"name": "CAPI Migration", "color" : "red" , "source":"cloud"},
+                {"name": "Search", "color" : "green", "source":"cloud" },
+                {"name": "Cart & Checkout", "color" : "orange", "source":"cloud", 
+                    "children":[
+                        {"name": "Cart Reviews", "color" : "green", "id":"cartreviews", "source":"cloud",
+                            "children":[
+                                {"name": "Shipping Methods", "color" : "green" ,"id":"shippingmethodsv2", "source":"cloud"},
+                                {"name": "Delivery Estimate", "color" : "green","id":"deliveryestimatesv2", "source":"cloud" },
+                                {"name": "Shipping Method Details", "color" : "green","id":"shippingmethoddetail", "source":"cloud" },
+                                {"name": "Shipping Methods Postal Details", "color" : "green","id":"shippingmethodpostaldetail", "source":"cloud" },
+                                {"name": "Pricing", "color" : "green","id":"pricing", "source":"cloud" },
+                                {"name": "Promotions", "color" : "green" ,"id":"userpromotions", "source":"cloud" },
+                                {"name": "VAS Validation", "color" : "green", "id":"vasvalidations", "source":"cloud" },
+                                {"name": "Global Tax", "color" : "green", "id":"globaltax", "source":"cloud" }                              
+                            ]
+                        },
+                        {"name": "Checkout Previews (CQRS)", "color" : "green", "source":"cloud",
+                            "children":[
+                                {"name": "CMD", "color" : "green", "id":"checkoutpreviewscmd", "source":"cloud" },
+                                {"name": "QRY", "color" : "green", "id":"checkoutpreviewsqry", "source":"cloud" },
+                                {"name": "WKR", "color" : "green", "id":"checkoutswkr", "source":"cloud" }
+                            ]
+                        },
+                        {"name": "Checkouts (CQRS)", "color" : "red", "source":"cloud", "id":"checkoutscqrs",
+                            "children":[
+                                {"name": "Charon v2 CMD", "color" : "green","id":"charonv2cmd", "source":"cloud" },
+                                {"name": "Charon v2 FERRY", "color" : "green","id":"charonv2ferry", "source":"cloud" },
+                                {"name": "Charon v2 WKR", "color" : "green","id":"charonv2wkr", "source":"cloud" },
+                                {"name": "Shipping Methods", "color" : "red", "id":"shippingmethodsv2", "source":"cloud" },
+                                {"name": "Delivery Estimate", "color" : "green", "id":"deliveryestimatesv2", "source":"cloud" },
+                                {"name": "Shipping Method Details", "color" : "green", "id":"shippingmethoddetail", "source":"cloud" },
+                                {"name": "Shipping Methods Postal Details", "color" : "green", "id":"shippingmethodpostaldetail", "source":"cloud" },
+                                {"name": "Pricing", "color" : "orange", "id":"pricing", "source":"cloud" },
+                                {"name": "Promotions", "color" : "green", "id":"userpromotions", "source":"cloud" },
+                                {"name": "VAS Validation", "color" : "green", "id":"vasvalidations", "source":"cloud" },
+                                {"name": "Global Tax", "color" : "red", "id":"globaltax", "source":"cloud" }
+                            ]
+                        },
+                        {"name": "Shipping Options", "color" : "red","id":"shippingoptions", "source":"cloud",
+                            "children":[
+                                {"name": "Shipping Methods", "color" : "green","id":"shippingmethodsv2", "source":"cloud" },
+                                {"name": "Delivery Estimate", "color" : "green", "id":"deliveryestimatesv2", "source":"cloud" },
+                                {"name": "Shipping Method Details", "color" : "green", "id":"shippingmethoddetail", "source":"cloud" },
+                                {"name": "Shipping Methods Postal Details", "color" : "green", "id":"shippingmethodpostaldetail", "source":"cloud" },
+                                {"name": "Pricing", "color" : "green", "id":"pricing", "source":"cloud" },
+                                {"name": "Promotions", "color" : "green" , "id":"userpromotions", "source":"cloud"},
+                                {"name": "VAS Validation", "color" : "green", "id":"vasvalidations" , "source":"cloud"},
+                                {"name": "Global Tax", "color" : "green" , "id":"globaltax", "source":"cloud"}
+                            ]
+                        }
+                    ]
+                },
+                {"name": "Payment", "color" : "red", "source":"cloud",
+                    "children":[
+                        {"name": "ApplePay v2", "color" : "red", "id":"payapproval", "source":"cloud"},
+                        {"name": "Approval v2", "color" : "orange", "id":"paymentapproval", "source":"cloud"},
+                        {"name": "Credit Card Submit v1", "color" : "green", "id":"creditcardsubmit--1", "source":"cloud"},
+                        {"name": "Deferred Paymment v1", "color" : "orange", "id":"pendingpayment", "source":"cloud"},
+                        {"name": "Payment Options v2", "color" : "green", "id":"paymentoptions", "source":"cloud"},
+                        {"name": "Payment Preview v2", "color" : "green", "id":"paymentpreview", "source":"cloud"},
+                        {"name": "Stored Payment v1", "color" : "green", "id":"storedpayments", "source":"cloud"},
+                        {"name": "Payment Wallet v1", "color" : "red", "id":"paymentwallet", "source":"cloud"}
+                    ]
+                },
+                {"name": "Events", "color" : "red"},
+                {"name": "Merch Product", "color" : "green",
+                    "children":[
+                        {"name": "Merchandised Products Service v2", "color" : "orange", "id":"merchproductsv2"},
+                        {"name": "Merchandised SKUs Service v2", "color" : "green", "id":"merchskusv2"},
+                        {"name": "Merchandised Prices Service v2", "color" : "green", "id":"merchpricesv2"},
+                        {"name": "Merchandised Value Added Service v1", "color" : "orange", "id":"productfeedv2"},
+                        {"name": "Product Content Service v1", "color" : "green", "id":"productcontent"}
+                    ]
+                },
+                {"name": "Order", "color" : "red"}
+                
+            ]
+        }
+        
+    ]
+}
+
+  const urlPublicada = 'https://docs.google.com/spreadsheets/d/1XgQkNm0y7gl1l2lqqd5FUpHbmmFws57XN-cVTe_lqYs/pub?gid=1345404208&single=true&output=csv'
+// d3.csv(urlPublicada).then(data => {console.log("data de gugel", data)}).catch(error => {console.error("Error loading data:", error);});
+
+var colapsarTodo;
+// ###############################################################################
+// ###############################################################################
+  // ABAJO DE ACA NO TOCAR
+  // ###############################################################################
+  // ###############################################################################
+  var NODE_SIZE = 15; // AJUSTAR TAMAÑO DE NODOS
+  
+  function init() {
+var diameter = 1000;
+
+var margin = {top: 20, right: 20, bottom: 20, left: 20},
+    width = diameter,
+    height = diameter;
+    
+var i = 0,
+    duration = 350,
+    root;
+
+var tree = d3.layout.tree()
+    .size([200, diameter / 2 - 80])
+    .separation(function(a, b) { return (a.parent == b.parent ? 1 : 5) / a.depth; });
+
+var diagonal = d3.svg.diagonal.radial()
+    .projection(function(d) { return [d.y, d.x / 180 * Math.PI]; });
+
+var svg = d3.select("body").append("svg")
+    .attr("width", width )
+    .attr("height", height )
+  .append("g")
+    .attr("transform", "translate(" + diameter / 5+ "," + diameter / 2.5+ ")");
+
+root = pubs;
+root.x0 = height / 2;
+root.y0 = 0;
+
+//root.children.forEach(collapse); // start with all children collapsed
+    colapsarTodo = function(root){
+      root.children.forEach(collapse);
+    }
+update(root);
+
+d3.select(self.frameElement).style("height", "800px");
+
+  
+
+function update(source) {
+
+  // Compute the new tree layout.
+  var nodes = tree.nodes(root),
+      links = tree.links(nodes);
+
+  // Normalize for fixed-depth.
+  nodes.forEach(function(d) { d.y = d.depth * 135; });
+
+  // Update the nodes…
+  var node = svg.selectAll("g.node")
+      .data(nodes, function(d) { return d.id || (d.id = ++i); });
+
+  // Enter any new nodes at the parent's previous position.
+  var nodeEnter = node.enter().append("g")
+      .attr("class", "node")
+      //.attr("transform", function(d) { return "rotate(" + (d.x - 90) + ")translate(" + d.y + ")"; })
+      .on("click", click);
+
+  nodeEnter.append("circle")
+     // .attr("r", 1e-6)
+      .attr("r", function(d) { 
+    return NODE_SIZE * Math.pow(0.95, d.depth); 
+  }).style("fill", function(d) { return d._children ? d.color : d.color; });
+
+ 
+  
+  nodeEnter.append("text")
+    .attr("x", function(d) { 
+        return (NODE_SIZE * Math.pow(0.95, d.depth)) + 5; // Adjust the offset as needed
+    })
+     // .attr("x", 10)
+      .attr("dy", ".35em")
+     .attr("text-anchor", "start")
+     .attr("transform", function(d) { return d.x < 180 ? "translate(0)" : "rotate(90)translate(-" + (d.name.length * 5.5)  + ")"; })
+      .text(function(d) { return d.name; })
+  .attr("stroke-linejoin", "round")
+        .attr("stroke-width", .75)
+        .attr("stroke", "gray")
+      .style("fill-opacity", 1e-6);
+  
+
+  // Transition nodes to their new position.
+  var nodeUpdate = node.transition()
+      .duration(duration)
+      .attr("transform", function(d) { return "rotate(" + (d.x - 90) + ")translate(" + d.y + ")"; })
+
+
+  nodeUpdate.select("circle")
+      .attr("r", 7)
+      .style("fill", function(d) { return d._children ? d.color : d.color; });
+
+  nodeUpdate.select("text")
+      .style("fill-opacity", 1)
+      .attr("transform", function(d) { return d.x < 180 ? "translate(0)" : "rotate(90)translate(-" + (d.name.length - 50)  + ")"; });
+
+  // TODO: appropriate transform
+  var nodeExit = node.exit().transition()
+      .duration(duration)
+      //.attr("transform", function(d) { return "diagonal(" + source.y + "," + source.x + ")"; })
+      .remove();
+
+  nodeExit.select("circle")
+      .attr("r", 1e-6);
+
+  nodeExit.select("text")
+      .style("fill-opacity", 1e-6);
+
+  // Update the links…
+  var link = svg.selectAll("path.link")
+      .data(links, function(d) { return d.target.id; });
+
+  // Enter any new links at the parent's previous position.
+  link.enter().insert("path", "g")
+      .attr("class", "link")
+      .attr("d", function(d) {
+        var o = {x: source.x0, y: source.y0};
+        return diagonal({source: o, target: o});
+      });
+
+  // Transition links to their new position.
+  link.transition()
+      .duration(duration)
+      .attr("d", diagonal);
+
+  // Transition exiting nodes to the parent's new position.
+  link.exit().transition()
+      .duration(duration)
+      .attr("d", function(d) {
+        var o = {x: source.x, y: source.y};
+        return diagonal({source: o, target: o});
+      })
+      .remove();
+
+  // Stash the old positions for transition.
+  nodes.forEach(function(d) {
+    d.x0 = d.x;
+    d.y0 = d.y;
+  });
+}
+
+// Toggle children on click.
+function click(d) {
+  if(d.url) {
+    const targetUrl = d.url;
+    window.open(targetUrl, '_blank');
+    console.log("clickeado nodo con links");
+  }
+  if (d.children) {
+    d._children = d.children;
+    d.children = null;
+  } else {
+    d.children = d._children;
+    d._children = null;
+  }
+  
+  update(d);
+}
+
+// Collapse nodes
+function collapse(d) {
+  if (d.children) {
+      d._children = d.children;
+      d._children.forEach(collapse);
+      d.children = null;
+    }
+}
+
+    }
+
+  setTimeout(init, 50);
+  
+</script>
+<style>
+.node {
+  cursor: pointer;
+}
+
+.node circle {
+  fill: #fff;
+  stroke: steelblue;
+  stroke-width: 1.5px;
+}
+
+.node text {
+  font: 12px sans-serif;
+}
+
+.link {
+  fill: none;
+  stroke: #ccc;
+  stroke-width: 1.5px;
+}
+  
+</style>
+</head>
+<body>
+  <input type="button" text="Colapsar todo" onclick="colapsarTodo()"/>
+</body>
+</html>
