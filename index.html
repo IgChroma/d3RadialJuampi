@@ -19,7 +19,7 @@
                 {"source":"legacy","name": "App-CE_JMS", "color" : "green" },
                 {"source":"legacy","name": "App-CE_JMS_Bridge", "color" : "green" },
                 {"source":"legacy","name": "App-CE_Sterling_Inv", "color" : "green" },
-                {"source":"legacy","name": "Este tiene links", "color" : "blue", link: 'www.google.com' },
+                {"source":"legacy","name": "Este tiene links", "color" : "blue", url: 'https://www.google.com' },
                 {"source":"legacy","name": "App-CE_Sterling_NikeID", "color" : "green" },
                 {"source":"legacy","name": "App-CE_Sterling_MPOS", "color" : "green" },
                 {"source":"legacy","name": "App-CE_Sterling_OMS", "color" : "green" },
@@ -133,7 +133,11 @@
     ]
 }
 
+  const urlPublicada = 'https://docs.google.com/spreadsheets/d/1XgQkNm0y7gl1l2lqqd5FUpHbmmFws57XN-cVTe_lqYs/pub?gid=1345404208&single=true&output=csv'
 
+d3.csv(urlPublicada).then(data => {console.log("data de gugel", data)}).catch(error => {console.error("Error loading data:", error);});
+
+var colapsarTodo;
 // ###############################################################################
 // ###############################################################################
   // ABAJO DE ACA NO TOCAR
@@ -170,6 +174,9 @@ root.x0 = height / 2;
 root.y0 = 0;
 
 //root.children.forEach(collapse); // start with all children collapsed
+    colapsarTodo = function(root){
+      root.children.forEach(collapse);
+    }
 update(root);
 
 d3.select(self.frameElement).style("height", "800px");
@@ -279,8 +286,8 @@ function update(source) {
 
 // Toggle children on click.
 function click(d) {
-  if(d.link) {
-    const targetUrl = new URL(d.link); // Construct complete URL
+  if(d.url) {
+    const targetUrl = d.url;
     window.open(targetUrl, '_blank');
     console.log("clickeado nodo con links");
   }
@@ -321,7 +328,7 @@ function collapse(d) {
 }
 
 .node text {
-  font: 10px sans-serif;
+  font: 12px sans-serif;
 }
 
 .link {
@@ -332,5 +339,7 @@ function collapse(d) {
   
 </style>
 </head>
-<body></body>
+<body>
+  <input type="button" text="Colapsar todo" onclick="colapsarTodo()"/>
+</body>
 </html>
